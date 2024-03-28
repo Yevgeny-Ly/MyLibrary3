@@ -2,23 +2,33 @@
 // https://docs.swift.org/swift-book
 
 import UIKit
-
 public class AutorizationTextField: UITextField {
-    private func makeTextFields(textField: UITextField, placeholder: String, leftIcon: UIImage) -> UITextField {
-        textField.placeholder = placeholder
-        textField.backgroundColor = .white
-        textField.layer.borderWidth = 1
-        textField.layer.cornerRadius = 12
-        textField.layer.borderColor = UIColor.gray.cgColor
-        let leftView = UIView()
-        let imageView = UIImageView()
-        leftView.addSubview(imageView)
-        leftView.frame.size = CGSize(width: 30, height: 30)
-        imageView.frame.size = CGSize(width: 18, height: 18)
-        imageView.center = leftView.center
-        imageView.image = leftIcon
-        textField.leftView = leftView
-        textField.leftViewMode = .always
-        return self
-    }
+    public struct Model {
+          public var placeholder: String?
+          public init(placeholder: String?) {
+              self.placeholder = placeholder
+          }
+      }
+
+      public override init(frame: CGRect) {
+          super.init(frame: frame)
+          setupField()
+      }
+      
+      required init?(coder: NSCoder) {
+          super.init(coder: coder)
+          setupField()
+      }
+      
+      private func setupField() {
+          self.backgroundColor = .white
+          self.layer.borderWidth = 1
+          self.layer.cornerRadius = 12
+          self.leftViewMode = .always
+      }
+      
+      public func models(model: Model) {
+          placeholder = model.placeholder
+      }
+
 }
